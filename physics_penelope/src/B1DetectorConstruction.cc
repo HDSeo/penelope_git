@@ -50,6 +50,7 @@ G4Material* vacuum = new G4Material("Vacuum",
 
 //G4Material* anode_mat = new G4Material("anode",74,183.84*g/mole,19.3*g/cm3,kStateGas,2273*kelvin,pressure);
 
+G4Material* beryllium = new G4Material("Beryllium", 4., 9.012182*g/mole, 1.8480*g/cm3);
 
 /////////////////////////////////////////////////////
 
@@ -59,7 +60,7 @@ G4Material* vacuum = new G4Material("Vacuum",
 
   // Envelope parameters
   //
-  G4double env_sizeXY = 20*cm, env_sizeZ = 30*cm;
+  G4double env_sizeXY = 50*cm, env_sizeZ = 30*cm;
    
   // Option to switch on/off checking of volumes overlaps
   //
@@ -73,7 +74,7 @@ G4Material* vacuum = new G4Material("Vacuum",
   
   G4Box* solidWorld =    
     new G4Box("World",                       //its name
-       0.5*world_sizeXY, 0.5*world_sizeXY, 0.5*world_sizeZ);     //its size
+       world_sizeXY, world_sizeXY, world_sizeZ);     //its size
       
   G4LogicalVolume* logicWorld =                         
     new G4LogicalVolume(solidWorld,          //its solid
@@ -95,7 +96,7 @@ G4Material* vacuum = new G4Material("Vacuum",
   //  
   G4Box* solidEnv =    
     new G4Box("Envelope",                    //its name
-        0.5*env_sizeXY, 0.5*env_sizeXY, 0.5*env_sizeZ); //its size
+        0.15*env_sizeXY, 0.15*env_sizeXY, 0.15*env_sizeZ); //its size
       
   G4LogicalVolume* logicEnv =                         
     new G4LogicalVolume(solidEnv,            //its solid
@@ -149,11 +150,11 @@ G4Transform3D transform = G4Transform3D(rotm,pos2);
                     checkOverlaps);          //overlaps checking
 ///////////////////////////////
 
-  G4Material* shape3_mat = nist->FindOrBuildMaterial("G4_AIR");
+  //G4Material* shape3_mat = nist->FindOrBuildMaterial("G4_AIR");
 
-  G4ThreeVector pos3 = G4ThreeVector(-10*cm, 0*cm, 0*cm);
+  G4ThreeVector pos3 = G4ThreeVector(-30.*cm, 0*cm, 0*cm);
   // Trapezoid shape       
-  G4double shape3_dxa = 5*cm, shape3_dxb = 5*cm;
+  G4double shape3_dxa = 1*cm, shape3_dxb = 1*cm;
   G4double shape3_dya = 90*cm, shape3_dyb = 90*cm;
   G4double shape3_dz  = 90*cm;      
   G4Trd* solidShape3 =    
@@ -170,12 +171,42 @@ G4Transform3D transform = G4Transform3D(rotm,pos2);
 		    pos3,
                     logicShape3,             //its logical volume
                     "Shape3",                //its name
-                    logicEnv,                //its mother  volume
+//                    logicEnv,                //its mother  volume
+		    logicWorld,
                     false,                   //no boolean operation
                     0,                       //copy number
                     checkOverlaps);          //overlaps checking
 ///////////////////////////////
 
+
+  G4ThreeVector pos4 = G4ThreeVector(-25.*cm, 0*cm, 0*cm);
+  // Trapezoid shape       
+  G4double shape4_dxa = 1*cm, shape4_dxb = 1*cm;
+  G4double shape4_dya = 90*cm, shape4_dyb = 90*cm;
+  G4double shape4_dz  = 90*cm;      
+  G4Trd* solidShape4 =    
+    new G4Trd("Shape4",                      //its name
+              0.5*shape4_dxa, 0.5*shape4_dxb, 
+              0.5*shape4_dya, 0.5*shape4_dyb, 0.5*shape4_dz); //its size
+                
+  G4LogicalVolume* logicShape4 =                         
+    new G4LogicalVolume(solidShape4,         //its solid
+                        //vacuum,
+			beryllium,          //its material
+			//shape2_mat,
+                        "Shape4");           //its name
+               
+  new G4PVPlacement(0,                       //no rotation
+		    pos4,
+                    logicShape4,             //its logical volume
+                    "Shape4",                //its name
+//                    logicEnv,                //its mother  volume
+		    logicWorld,
+                    false,                   //no boolean operation
+                    0,                       //copy number
+                    checkOverlaps);          //overlaps checking
+
+///////////////////////////////
   //
   fScoringVolume = logicShape2;
 
