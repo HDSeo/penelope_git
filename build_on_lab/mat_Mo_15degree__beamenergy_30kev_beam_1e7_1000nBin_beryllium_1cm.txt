@@ -1,0 +1,4 @@
+# mesh name: mesh
+# primitive scorer name: fF
+# iX, iY, iZ, value 
+0,0,0,4

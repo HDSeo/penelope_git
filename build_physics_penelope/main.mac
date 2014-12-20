@@ -1,7 +1,7 @@
 /score/create/boxMesh mesh
 /score/mesh/boxSize 0.000001 45 45 cm
-/score/mesh/nBin 1 10 10
-/score/mesh/translate/xyz -25.5 0 0 cm
+/score/mesh/nBin 1 1 1
+/score/mesh/translate/xyz -29.5 0 0 cm
 /score/quantity/nOfTrack fF 1
 #/score/quantity/energyDeposit eDep 1
 /score/filter/particle gammafilter gamma
@@ -11,10 +11,10 @@
 
 /score/close
 /vis/scene/endOfEventAction accumulate 1000000000
-/tracking/verbose 1
+#/tracking/verbose 1
 /gun/particle e-
 /gun/energy 30 keV
-/run/beamOn 100
+/run/beamOn 10000
 /score/drawProjection mesh fF
-/score/dumpQuantityToFile mesh fF mat_Mo_15degree__beamenergy_30kev_beam_1e6.txt
+/score/dumpQuantityToFile mesh fF mat_Mo_15degree__beamenergy_30kev_beam_1e7_1000nBin_beryllium_1cm.txt
 #/score/dumpQuantityToFile mesh eDep gamma_test_50_keV.txt
