@@ -1,0 +1,2 @@
+/home/seohyeondeok/Git/physicslist/penelope_git/build_on_lab/CMakeFiles/B1.dir
+/home/seohyeondeok/Git/physicslist/penelope_git/build_on_lab/CMakeFiles/exampleB1.dir
