@@ -1,0 +1,20 @@
+/score/create/boxMesh mesh
+/score/mesh/boxSize 0.000001 45 45 cm
+/score/mesh/nBin 1 30 30
+/score/mesh/translate/xyz -24.5 0 0 cm
+/score/quantity/nOfTrack fF 1
+#/score/quantity/energyDeposit eDep 1
+/score/filter/particle gammafilter gamma
+#/score/filter/neutral neutralfilter
+#/score/filter/charged chargefilter
+#/score/filter/particle efileter e-
+
+/score/close
+/vis/scene/endOfEventAction accumulate 1000000000
+/tracking/verbose 1
+/gun/particle e-
+/gun/energy 30 keV
+/run/beamOn 100000
+/score/drawProjection mesh fF
+/score/dumpQuantityToFile mesh fF mat_Mo_15degree__beamenergy_30kev_beam_1e6.txt
+#/score/dumpQuantityToFile mesh eDep gamma_test_50_keV.txt
